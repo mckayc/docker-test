@@ -1,3 +1,5 @@
 Flask
 Flask-SQLAlchemy
-python-dotenv 
+python-dotenv
+click
+psutil 

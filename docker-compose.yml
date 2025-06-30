@@ -6,14 +6,24 @@ services:
       - "5485:5000"
     environment:
       - PORT=5000
+      - SECRET_KEY=${SECRET_KEY:-default_dev_key_please_change}
+      - DATABASE_URL=${DATABASE_URL:-sqlite:///instance/task_donegeon.db}
     volumes:
-      - task_donegeon_data:/app/instance
+      - task_donegeon_data:/app/instance  # For SQLite database
+      - task_donegeon_config:/app/config   # For configuration files
+      - task_donegeon_uploads:/app/uploads # For user uploads
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 10s
+    restart: unless-stopped  # Add automatic restart policy
 
 volumes:
-  task_donegeon_data: 
+  task_donegeon_data:
+    name: task_donegeon_data
+  task_donegeon_config:
+    name: task_donegeon_config
+  task_donegeon_uploads:
+    name: task_donegeon_uploads 
