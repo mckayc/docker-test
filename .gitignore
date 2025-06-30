@@ -1,0 +1,4 @@
+.env
+task_donegeon.db
+__pycache__/
+*.pyc 
