@@ -16,6 +16,8 @@ import time
 from functools import wraps
 from collections import defaultdict
 import threading
+import sys
+from werkzeug.exceptions import HTTPException
 
 # Setup base directories
 BASE_DIR = Path(__file__).resolve().parent
@@ -32,7 +34,7 @@ UPLOADS_DIR.mkdir(exist_ok=True)
 # Setup logging with rotation
 def setup_logging():
     log_format = logging.Formatter(
-        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        '%(asctime)s - %(name)s - %(levelname)s - [%(pathname)s:%(lineno)d] - %(message)s'
     )
     
     # File handler with rotation (10MB max size, keep 5 backup files)
@@ -43,7 +45,7 @@ def setup_logging():
     )
     file_handler.setFormatter(log_format)
     
-    # Also log to console
+    # Also log to console with more detailed format
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(log_format)
     
@@ -138,6 +140,51 @@ def validate_username(username):
 def check_first_run():
     if request.endpoint not in ['first_run', 'health'] and User.query.count() == 0:
         return redirect(url_for('first_run'))
+
+@app.before_request
+def log_request_info():
+    """Log detailed request information"""
+    logger.info(f"""
+Request Details:
+  - Endpoint: {request.endpoint}
+  - Method: {request.method}
+  - URL: {request.url}
+  - Headers: {dict(request.headers)}
+  - Args: {dict(request.args)}
+  - Form Data: {dict(request.form) if request.form else 'No form data'}
+  - Files: {[f.filename for f in request.files.values()] if request.files else 'No files'}
+  - Remote Addr: {request.remote_addr}
+""".strip())
+
+@app.after_request
+def log_response_info(response):
+    """Log response information"""
+    logger.info(f"""
+Response Details:
+  - Status: {response.status_code}
+  - Headers: {dict(response.headers)}
+  - Content Type: {response.content_type}
+  - Content Length: {response.content_length}
+""".strip())
+    return response
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    """Log all unhandled exceptions"""
+    logger.error(f"""
+Exception Details:
+  - Type: {type(e).__name__}
+  - Message: {str(e)}
+  - URL: {request.url}
+  - Method: {request.method}
+  - Remote Addr: {request.remote_addr}
+  - User Agent: {request.user_agent}
+""".strip(), exc_info=True)
+    
+    # Return appropriate error response
+    if isinstance(e, HTTPException):
+        return e
+    return "An unexpected error occurred", 500
 
 @app.route('/uploads/<path:filename>')
 def uploaded_file(filename):
@@ -458,14 +505,55 @@ def internal_error(error):
 if __name__ == '__main__':
     with app.app_context():
         try:
+            # Log system information
+            logger.info(f"""
+System Information:
+  - Python Version: {sys.version}
+  - Platform: {sys.platform}
+  - Working Directory: {os.getcwd()}
+  - Base Directory: {BASE_DIR}
+  - Environment: {app.env}
+  - Debug Mode: {app.debug}
+""".strip())
+
+            # Log configuration
+            logger.info(f"""
+Application Configuration:
+  - Secret Key Set: {'Yes' if app.config['SECRET_KEY'] != 'default_dev_key_please_change' else 'No (using default)'}
+  - Database URL: {app.config['SQLALCHEMY_DATABASE_URI']}
+  - Upload Folder: {app.config['UPLOAD_FOLDER']}
+  - Max Content Length: {app.config['MAX_CONTENT_LENGTH']} bytes
+""".strip())
+
+            # Log directory status
+            for dir_name, dir_path in [
+                ('Instance', INSTANCE_DIR),
+                ('Config', CONFIG_DIR),
+                ('Uploads', UPLOADS_DIR)
+            ]:
+                logger.info(f"""
+{dir_name} Directory Status:
+  - Path: {dir_path}
+  - Exists: {dir_path.exists()}
+  - Writable: {os.access(dir_path, os.W_OK)}
+  - Owner: {os.stat(dir_path).st_uid}
+  - Permissions: {oct(os.stat(dir_path).st_mode)[-3:]}
+""".strip())
+
+            # Test database connection and log status
             db.create_all()
-            logger.info('Database tables created or verified.')
-            if User.query.count() == 0:
-                logger.info('No users found. First run wizard will be shown.')
+            logger.info('Database tables created or verified successfully')
+            
+            user_count = User.query.count()
+            logger.info(f'Database Status: {user_count} users found')
+            if user_count == 0:
+                logger.info('No users found - First run wizard will be shown')
             else:
-                logger.info('Users found. Skipping first run wizard.')
+                logger.info('Users found - First run wizard will be skipped')
+                
         except Exception as e:
-            logger.error(f'Error initializing database: {str(e)}')
+            logger.error('Failed to initialize application', exc_info=True)
+            raise
 
     port = int(os.environ.get('PORT', 5000))
     logger.info(f'Starting Task Donegeon on http://0.0.0.0:{port}')

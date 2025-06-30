@@ -10,6 +10,8 @@ services:
       - PORT=5000
       - FLASK_ENV=production
       - PYTHONUNBUFFERED=1  # Ensure Python output is sent to container logs
+      - PYTHONTRACEMALLOC=1 # Enable memory tracing
+      - PYTHONFAULTHANDLER=1 # Enable fault handler for better crash reports
       - SECRET_KEY=${SECRET_KEY:-changeme_in_production}
       - DATABASE_URL=${DATABASE_URL:-sqlite:///instance/task_donegeon.db}
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
@@ -29,8 +31,12 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "10m"
-        max-file: "3"
+        max-size: "50m"  # Increased from 10m
+        max-file: "5"    # Increased from 3
+        mode: "non-blocking"
+        max-buffer-size: "4m"
+        tag: "{{.Name}}"
+        labels: "production,task_donegeon"
     deploy:
       resources:
         limits:
