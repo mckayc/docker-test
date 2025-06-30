@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  body {
+    @apply bg-medieval-parchment text-medieval-wood min-h-screen;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medieval transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-medieval-wood text-medieval-parchment hover:bg-medieval-leather;
+  }
+
+  .btn-secondary {
+    @apply bg-medieval-stone text-medieval-parchment hover:bg-medieval-wood;
+  }
+
+  .input {
+    @apply px-4 py-2 rounded-lg border border-medieval-wood bg-medieval-parchment focus:outline-none focus:ring-2 focus:ring-medieval-gold;
+  }
+
+  .card {
+    @apply bg-medieval-parchment p-6 rounded-lg shadow-lg border border-medieval-wood;
+  }
+
+  .task-item {
+    @apply flex items-center gap-4 p-4 rounded-lg bg-medieval-parchment border border-medieval-wood hover:bg-medieval-parchment/80 transition-colors duration-200;
+  }
+
+  .achievement {
+    @apply flex items-center gap-4 p-4 rounded-lg bg-medieval-gold/20 border border-medieval-gold;
+  }
+
+  .inventory-item {
+    @apply flex items-center gap-4 p-4 rounded-lg bg-medieval-silver/20 border border-medieval-silver;
+  }
+} 
