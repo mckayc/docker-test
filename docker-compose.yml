@@ -1,8 +1,8 @@
 version: '3.8'
 services:
-  web:
+  task_donegeon:
     build: .
     ports:
-      - "5874:5000"
+      - "5485:5000"
     environment:
       - PORT=5000 

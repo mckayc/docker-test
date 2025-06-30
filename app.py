@@ -3,8 +3,12 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
@@ -60,5 +64,11 @@ def hello_world():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
+        logger.info('Database tables created or verified.')
+        if User.query.count() == 0:
+            logger.info('No users found. First run wizard will be shown.')
+        else:
+            logger.info('Users found. Skipping first run wizard.')
     port = int(os.environ.get('PORT', 5000))
+    logger.info(f'Starting Task Donegeon on http://0.0.0.0:{port}')
     app.run(host='0.0.0.0', port=port) 
