@@ -1,4 +1,5 @@
 .env
+!.env.example
 task_donegeon.db
 __pycache__/
 *.pyc 
