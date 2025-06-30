@@ -12,12 +12,13 @@ def create_env_template():
     """Create a template with all required environment variables"""
     template = {
         'SECRET_KEY': generate_secret_key(),
+        'BASE_PATH': '/srv/dev-disk-by-uuid-2f5a0666-e1d5-4c25-82da-015a6d210094/Archive/Portainer/configs/taskdonegeon/appdata',  # Change this as needed
         'DATABASE_URL': 'sqlite:///instance/task_donegeon.db',
         'LOG_LEVEL': 'INFO',
         'MAX_UPLOAD_SIZE': '16777216',  # 16MB in bytes
-        'DATA_PATH': '/var/lib/task_donegeon/data',
-        'CONFIG_PATH': '/var/lib/task_donegeon/config',
-        'UPLOADS_PATH': '/var/lib/task_donegeon/uploads'
+        'DATA_PATH': '/srv/dev-disk-by-uuid-2f5a0666-e1d5-4c25-82da-015a6d210094/Archive/Portainer/configs/taskdonegeon/appdata/data',
+        'CONFIG_PATH': '/srv/dev-disk-by-uuid-2f5a0666-e1d5-4c25-82da-015a6d210094/Archive/Portainer/configs/taskdonegeon/appdata/config',
+        'UPLOADS_PATH': '/srv/dev-disk-by-uuid-2f5a0666-e1d5-4c25-82da-015a6d210094/Archive/Portainer/configs/taskdonegeon/appdata/uploads'
     }
     return template
 

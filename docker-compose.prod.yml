@@ -14,10 +14,11 @@ services:
       - DATABASE_URL=${DATABASE_URL:-sqlite:///instance/task_donegeon.db}
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
       - MAX_UPLOAD_SIZE=${MAX_UPLOAD_SIZE:-16777216}  # 16MB in bytes
+      - BASE_PATH=${BASE_PATH:-/data}
     volumes:
-      - task_donegeon_data:/app/instance
-      - task_donegeon_config:/app/config
-      - task_donegeon_uploads:/app/uploads
+      - ${BASE_PATH}/data:/app/instance
+      - ${BASE_PATH}/config:/app/config
+      - ${BASE_PATH}/uploads:/app/uploads
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
