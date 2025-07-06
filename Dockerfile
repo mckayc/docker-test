@@ -6,8 +6,8 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 
 # Create necessary directories
-RUN mkdir -p /app/instance /app/config /app/uploads && \
-    chmod 755 /app/instance /app/config /app/uploads
+RUN mkdir -p /app/config && \
+    chmod 755 /app/config
 
 # Install requirements first for better caching
 COPY requirements.txt requirements.txt

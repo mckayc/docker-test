@@ -13,14 +13,10 @@ services:
       - PYTHONTRACEMALLOC=1 # Enable memory tracing
       - PYTHONFAULTHANDLER=1 # Enable fault handler for better crash reports
       - SECRET_KEY=${SECRET_KEY:-changeme_in_production}
-      - DATABASE_URL=${DATABASE_URL:-sqlite:///instance/task_donegeon.db}
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
-      - MAX_UPLOAD_SIZE=${MAX_UPLOAD_SIZE:-16777216}  # 16MB in bytes
       - BASE_PATH=${BASE_PATH:-/data}
     volumes:
-      - ${BASE_PATH}/data:/app/instance
       - ${BASE_PATH}/config:/app/config
-      - ${BASE_PATH}/uploads:/app/uploads
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s
