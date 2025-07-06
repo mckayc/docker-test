@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Task Donegeon</title>
+    <title>Join the Quest - Task Donegeon</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cinzel', 'Times New Roman', serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -14,23 +14,27 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
+            background: linear-gradient(135deg, #2C3E2D, #4A3C31);
+            color: #E8DCC4;
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 0h20v20H0V0zm10 17L3 5h14L10 17z" fill="%23463E33" fill-opacity="0.1"/%3E%3C/svg%3E');
         }
         .container {
             max-width: 400px;
             width: 90%;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            background: rgba(43, 35, 27, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid #5C4D3C;
         }
         h1 {
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #E8DCC4;
+            font-weight: normal;
+            letter-spacing: 2px;
         }
         .form-group {
             margin-bottom: 1.5rem;
@@ -39,76 +43,91 @@
             display: block;
             margin-bottom: 0.5rem;
             font-size: 1rem;
+            color: #BFB5A3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
         input {
             width: 100%;
             padding: 0.8rem;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
+            border: 1px solid #5C4D3C;
+            border-radius: 5px;
+            background: rgba(43, 35, 27, 0.7);
+            color: #E8DCC4;
             font-size: 1rem;
             box-sizing: border-box;
+            font-family: 'Times New Roman', serif;
         }
         input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: #8B7355;
         }
         input:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.3);
+            border-color: #6E5C47;
+            background: rgba(43, 35, 27, 0.9);
         }
         button {
             width: 100%;
             padding: 1rem;
-            border: none;
-            border-radius: 10px;
-            background: #4CAF50;
-            color: white;
+            border: 1px solid #5C4D3C;
+            border-radius: 5px;
+            background: #5C4D3C;
+            color: #E8DCC4;
             font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Cinzel', serif;
         }
         button:hover {
-            background: #45a049;
+            background: #6E5C47;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .login-link {
             text-align: center;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
+            color: #BFB5A3;
         }
         .login-link a {
-            color: white;
+            color: #E8DCC4;
             text-decoration: none;
+            border-bottom: 1px solid #5C4D3C;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
         }
         .login-link a:hover {
-            text-decoration: underline;
+            border-bottom-color: #E8DCC4;
         }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Sign Up</h1>
+        <h1>Join the Quest</h1>
         <form action="/signup" method="post">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Choose a username" required>
+                <label for="username">Choose Your Title</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="email">Message Scroll</label>
+                <input type="email" id="email" name="email" placeholder="Enter email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Create a password" required>
+                <label for="password">Secret Code</label>
+                <input type="password" id="password" name="password" placeholder="Create password" required>
             </div>
             <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+                <label for="confirm_password">Verify Secret Code</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
             </div>
-            <button type="submit">Create Account</button>
+            <button type="submit">Begin Your Adventure</button>
         </form>
         <div class="login-link">
-            <p>Already have an account? <a href="/login">Login</a></p>
+            <p>Already a member of the guild? <a href="/login">Return to Your Quest</a></p>
         </div>
     </div>
 </body>

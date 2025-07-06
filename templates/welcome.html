@@ -6,7 +6,7 @@
     <title>Welcome to Task Donegeon</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cinzel', 'Times New Roman', serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -14,58 +14,69 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
+            background: linear-gradient(135deg, #2C3E2D, #4A3C31);
+            color: #E8DCC4;
             text-align: center;
+            background-image: url('data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 0h20v20H0V0zm10 17L3 5h14L10 17z" fill="%23463E33" fill-opacity="0.1"/%3E%3C/svg%3E');
         }
         .container {
             max-width: 800px;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            background: rgba(43, 35, 27, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid #5C4D3C;
         }
         h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #E8DCC4;
+            font-weight: normal;
+            letter-spacing: 2px;
         }
         p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
             line-height: 1.6;
+            color: #BFB5A3;
         }
         .btn {
             display: inline-block;
-            padding: 1rem 2rem;
+            padding: 1rem 2.5rem;
             font-size: 1.2rem;
             text-decoration: none;
-            color: white;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
+            color: #E8DCC4;
+            background: #3B4B3C;
+            border-radius: 5px;
             transition: all 0.3s ease;
             margin: 0.5rem;
+            border: 1px solid #5C4D3C;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: #4A5E4B;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         .btn-primary {
-            background: #4CAF50;
+            background: #5C4D3C;
         }
         .btn-primary:hover {
-            background: #45a049;
+            background: #6E5C47;
         }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Task Donegeon</h1>
-        <p>Your journey to productivity begins here. Join us to transform your daily tasks into epic quests!</p>
+        <h1>Task Donegeon</h1>
+        <p>Embark on your quest for productivity in this mystical realm where tasks become legendary achievements.</p>
         <div>
-            <a href="/signup" class="btn btn-primary">Sign Up</a>
-            <a href="/login" class="btn">Login</a>
+            <a href="/signup" class="btn btn-primary">Begin Your Journey</a>
+            <a href="/login" class="btn">Return to Your Quest</a>
         </div>
     </div>
 </body>
