@@ -1,6 +1,7 @@
 services:
   task_donegeon:
     build: .
+    pull_policy: always
     ports:
       - "5485:5000"
     environment:
