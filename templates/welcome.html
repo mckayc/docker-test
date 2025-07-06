@@ -68,9 +68,33 @@
             background: #6E5C47;
         }
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+        .flash-messages {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 1rem;
+        }
+        .flash-message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background: rgba(43, 35, 27, 0.9);
+            border: 1px solid #5C4D3C;
+            color: #E8DCC4;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+        }
     </style>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
     <div class="container">
         <h1>Task Donegeon</h1>
         <p>Embark on your quest for productivity in this mystical realm where tasks become legendary achievements.</p>

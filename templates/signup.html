@@ -102,12 +102,44 @@
             border-bottom-color: #E8DCC4;
         }
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+        .flash-messages {
+            width: 90%;
+            max-width: 400px;
+            margin-bottom: 1rem;
+        }
+        .flash-message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background: rgba(43, 35, 27, 0.9);
+            border: 1px solid #5C4D3C;
+            color: #E8DCC4;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+        }
     </style>
 </head>
 <body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+            <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
     <div class="container">
         <h1>Join the Quest</h1>
         <form action="/signup" method="post">
+            <div class="form-group">
+                <label for="first_name">First Name of Legend</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Family Name of Honor</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+            </div>
             <div class="form-group">
                 <label for="username">Choose Your Title</label>
                 <input type="text" id="username" name="username" placeholder="Enter username" required>
