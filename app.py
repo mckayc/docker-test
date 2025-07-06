@@ -9,6 +9,10 @@ TEMPLATES_DIR = BASE_DIR / 'templates'
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_dev_key_please_change')
 
+@app.route('/health')
+def health_check():
+    return {'status': 'healthy'}, 200
+
 @app.route('/')
 def welcome():
     return render_template('welcome.html')
