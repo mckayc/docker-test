@@ -1,2 +1,9 @@
 Flask==3.0.0
-Werkzeug==3.0.1 
+Werkzeug==3.0.1
+Flask-SQLAlchemy==3.1.1
+SQLAlchemy==2.0.23
+Flask-Migrate==4.0.5
+python-dotenv==1.0.0
+bcrypt==4.0.1  # For password hashing
+email-validator==2.1.0.post1  # For email validation
+Flask-Login==0.6.3  # For user session management 
