@@ -19,13 +19,14 @@ def signup():
         # Get form data
         first_name = request.form.get('first_name')
         last_name = request.form.get('last_name')
+        birthday = request.form.get('birthday')
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
         # Basic validation
-        if not all([first_name, last_name, username, email, password, confirm_password]):
+        if not all([first_name, last_name, birthday, username, email, password, confirm_password]):
             flash('All fields are required!')
             return render_template('signup.html')
 
