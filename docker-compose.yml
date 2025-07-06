@@ -1,6 +1,8 @@
 services:
   task_donegeon:
     build: .
+    image: mckayc/taskdonegeon:latest
+    container_name: task-donegeon-dev
     pull_policy: always
     ports:
       - "5485:5000"

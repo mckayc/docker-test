@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+    image: mckayc/taskdonegeon:prod
+    container_name: task-donegeon-prod
     pull_policy: always
     ports:
       - "5485:5000"
